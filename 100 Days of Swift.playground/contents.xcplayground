@@ -12,5 +12,6 @@
         <page name='Day 8 – structs, properties, and methods'/>
         <page name='Day 9 – access control, static properties, and laziness'/>
         <page name='Day 10 – classes and inheritance'/>
+        <page name='Day 11 – protocols, extensions, and protocol extensions'/>
     </pages>
 </playground>
