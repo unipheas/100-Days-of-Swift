@@ -14,5 +14,6 @@
         <page name='Day 10 – classes and inheritance'/>
         <page name='Day 11 – protocols, extensions, and protocol extensions'/>
         <page name='Day 12 – optionals, unwrapping, and typecasting'/>
+        <page name='Day 13 – Swift review, day one'/>
     </pages>
 </playground>
