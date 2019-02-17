@@ -11,5 +11,6 @@
         <page name='Day 7 – closures part two'/>
         <page name='Day 8 – structs, properties, and methods'/>
         <page name='Day 9 – access control, static properties, and laziness'/>
+        <page name='Day 10 – classes and inheritance'/>
     </pages>
 </playground>
