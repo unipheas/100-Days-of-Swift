@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='false'>
+<playground version='6.0' target-platform='ios' display-mode='raw' executeOnSourceChanges='false'>
     <pages>
         <page name='Index'/>
         <page name='Day 1 - variables, simple data types, and string interpolation'/>
         <page name='Day 2 – arrays, dictionaries, sets, and enums'/>
         <page name='Day 3 – operators and conditions'/>
+        <page name='Day 4 – loops, loops, and more loops'/>
+        <page name='Day 5 – functions, parameters, and errors'/>
     </pages>
 </playground>
