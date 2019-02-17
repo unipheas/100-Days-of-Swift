@@ -7,5 +7,7 @@
         <page name='Day 3 – operators and conditions'/>
         <page name='Day 4 – loops, loops, and more loops'/>
         <page name='Day 5 – functions, parameters, and errors'/>
+        <page name='Day 6 – closures part one'/>
+        <page name='Day 7 – closures part two'/>
     </pages>
 </playground>
