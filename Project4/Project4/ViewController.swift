@@ -2,48 +2,49 @@
 //  ViewController.swift
 //  Project4
 //
-//  Created by Brian Phillips on 2/24/19.
+//  Created by Brian Phillips on 2/25/19.
 //  Copyright © 2019 Titanian Inc. All rights reserved.
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UITableViewController {
-	var flags = [String]()
-
+class ViewController: UIViewController, WKNavigationDelegate {
+	var webView: WKWebView!
+	
+	override func loadView() {
+		webView = WKWebView()
+		webView.navigationDelegate = self
+		view = webView
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let fileManager = FileManager.default
-		let path = Bundle.main.resourcePath!
-		let items = try? fileManager.contentsOfDirectory(atPath: path)
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
 		
-		for item in items! {
-			if item.hasSuffix("png") {
-				flags.append(item)
-			}
-		}
-		
-		flags.sort()
+		let url = URL(string: "https://www.hackingwithswift.com")!
+		webView.load(URLRequest(url: url))
+		webView.allowsBackForwardNavigationGestures = true
+	}
+
+	@objc func openTapped() {
+		let alertController = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
+		alertController.addAction(UIAlertAction(title: "apple.com", style: .default, handler: openPage))
+		alertController.addAction(UIAlertAction(title: "hackingwithswift.com", style: .default, handler: openPage))
+		alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+		alertController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+		present(alertController, animated: true)
 	}
 	
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return flags.count
+	func openPage(action: UIAlertAction){
+		guard let actionTitle = action.title else { return }
+		guard let url = URL(string: "https://" + actionTitle) else { return }
+		webView.load(URLRequest(url: url))
 	}
 	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-		let cellName = flags[indexPath.row]
-		var components = cellName.components(separatedBy: ".")
-		cell.textLabel?.text = components[0]
-		return cell
-	}
-	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if let viewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-			viewController.selectedImage = flags[indexPath.row]
-			navigationController?.pushViewController(viewController, animated: true)
-		}
+	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+		title = webView.title
 	}
 }
 
