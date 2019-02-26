@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0AFA4B22250D8D0057AA9C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = FA0AFA4922250D8D0057AA9C /* .swiftlint.yml */; };
+		FA0AFA4C22250D8D0057AA9C /* run-scripts.sh in Resources */ = {isa = PBXBuildFile; fileRef = FA0AFA4A22250D8D0057AA9C /* run-scripts.sh */; };
 		FAD733922223849B008E6DBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD733912223849B008E6DBF /* AppDelegate.swift */; };
 		FAD733942223849B008E6DBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD733932223849B008E6DBF /* ViewController.swift */; };
 		FAD733972223849B008E6DBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD733952223849B008E6DBF /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0AFA4922250D8D0057AA9C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		FA0AFA4A22250D8D0057AA9C /* run-scripts.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "run-scripts.sh"; sourceTree = "<group>"; };
 		FAD7338E2223849B008E6DBF /* Project4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD733912223849B008E6DBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD733932223849B008E6DBF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +42,8 @@
 		FAD733852223849A008E6DBF = {
 			isa = PBXGroup;
 			children = (
+				FA0AFA4922250D8D0057AA9C /* .swiftlint.yml */,
+				FA0AFA4A22250D8D0057AA9C /* run-scripts.sh */,
 				FAD733902223849B008E6DBF /* Project4 */,
 				FAD7338F2223849B008E6DBF /* Products */,
 			);
@@ -74,6 +80,7 @@
 				FAD7338A2223849B008E6DBF /* Sources */,
 				FAD7338B2223849B008E6DBF /* Frameworks */,
 				FAD7338C2223849B008E6DBF /* Resources */,
+				FA0AFA4D22250D950057AA9C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -122,13 +129,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0AFA4B22250D8D0057AA9C /* .swiftlint.yml in Resources */,
 				FAD7339C2223849C008E6DBF /* LaunchScreen.storyboard in Resources */,
 				FAD733992223849C008E6DBF /* Assets.xcassets in Resources */,
 				FAD733972223849B008E6DBF /* Main.storyboard in Resources */,
+				FA0AFA4C22250D8D0057AA9C /* run-scripts.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FA0AFA4D22250D950057AA9C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n$SRCROOT/run-scripts.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FAD7338A2223849B008E6DBF /* Sources */ = {
