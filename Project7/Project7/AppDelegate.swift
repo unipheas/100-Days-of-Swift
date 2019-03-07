@@ -16,7 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(
 		_ application: UIApplication,
 		didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
+
+		if let tabBarController = window?.rootViewController as? UITabBarController {
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let viewController = storyboard.instantiateViewController(withIdentifier: "NavController")
+			viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 1)
+			tabBarController.viewControllers?.append(viewController)
+		}
+		
 		return true
 	}
 
