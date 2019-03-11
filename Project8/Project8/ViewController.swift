@@ -19,6 +19,7 @@ class ViewController: UIViewController {
 	var solutions = [String]()
 	
 	var level = 1
+	var totalAnswer = 0
 	var score = 0 {
 		didSet {
 			scoreLabel.text = "Score: \(score)"
@@ -65,12 +66,24 @@ class ViewController: UIViewController {
 		submit.translatesAutoresizingMaskIntoConstraints = false
 		submit.setTitle("SUBMIT", for: .normal)
 		submit.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
+		submit.layer.borderWidth = 1
+		submit.layer.borderColor = UIColor.lightGray.cgColor
+		submit.contentEdgeInsets.bottom = 10
+		submit.contentEdgeInsets.left = 10
+		submit.contentEdgeInsets.right = 10
+		submit.contentEdgeInsets.top = 10
 		view.addSubview(submit)
 		
 		let clear = UIButton(type: .system)
 		clear.translatesAutoresizingMaskIntoConstraints = false
 		clear.setTitle("CLEAR", for: .normal)
 		clear.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
+		clear.layer.borderWidth = 1
+		clear.layer.borderColor = UIColor.lightGray.cgColor
+		clear.contentEdgeInsets.bottom = 10
+		clear.contentEdgeInsets.left = 10
+		clear.contentEdgeInsets.right = 10
+		clear.contentEdgeInsets.top = 10
 		view.addSubview(clear)
 		
 		let buttonsView = UIView()
@@ -155,13 +168,20 @@ class ViewController: UIViewController {
 			
 			currentAnswer.text = ""
 			score += 1
+			totalAnswer += 1
 			
-			if score % 7 == 0 {
+			if totalAnswer % 7 == 0 {
 				let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
 				ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
 				present(ac, animated: true)
 			}
-		}	}
+		} else {
+			let alertController = UIAlertController(title: "Incorrect", message: "Your answer is not correct", preferredStyle: .alert)
+			alertController.addAction(UIAlertAction(title: "Try Again!", style: .default))
+			present(alertController, animated: true)
+			score -= 1
+		}
+	}
 	
 	@objc func clearTapped(_ sender: UIButton) {
 		currentAnswer.text = ""
@@ -182,6 +202,8 @@ class ViewController: UIViewController {
 		for btn in letterButtons {
 			btn.isHidden = false
 		}
+		
+		totalAnswer = 0
 	}
 	
 	func loadLevel() {
