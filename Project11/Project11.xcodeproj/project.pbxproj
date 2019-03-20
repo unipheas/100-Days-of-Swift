@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0DB3B922420767003C01C6 /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA0DB3B822420767003C01C6 /* FireParticles.sks */; };
 		FA6C24C42240A287000081F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C24C32240A287000081F9 /* AppDelegate.swift */; };
 		FA6C24C62240A287000081F9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA6C24C52240A287000081F9 /* GameScene.sks */; };
 		FA6C24CA2240A287000081F9 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C24C92240A287000081F9 /* GameScene.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0DB3B822420767003C01C6 /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
 		FA6C24C02240A287000081F9 /* Project11.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project11.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6C24C32240A287000081F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA6C24C52240A287000081F9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				FA6C24D02240A288000081F9 /* Assets.xcassets */,
 				FA6C24D22240A288000081F9 /* LaunchScreen.storyboard */,
 				FA6C24D52240A288000081F9 /* Info.plist */,
+				FA0DB3B822420767003C01C6 /* FireParticles.sks */,
 			);
 			path = Project11;
 			sourceTree = "<group>";
@@ -130,6 +133,7 @@
 			files = (
 				FA6C24CF2240A287000081F9 /* Main.storyboard in Resources */,
 				FA6C24C62240A287000081F9 /* GameScene.sks in Resources */,
+				FA0DB3B922420767003C01C6 /* FireParticles.sks in Resources */,
 				FA6C24D12240A288000081F9 /* Assets.xcassets in Resources */,
 				FA6C24D42240A288000081F9 /* LaunchScreen.storyboard in Resources */,
 			);
