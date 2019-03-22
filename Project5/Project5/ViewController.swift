@@ -9,7 +9,10 @@
 import UIKit
 
 class ViewController: UITableViewController {
+	
+	let defaults = UserDefaults.standard
 	var allWords = [String]()
+	var currentWord: String!
 	var usedWords = [String]()
 
 	override func viewDidLoad() {
@@ -35,12 +38,27 @@ class ViewController: UITableViewController {
 			allWords = ["silkworm"]
 		}
 		
-		startGame()
+		startGame(true)
 	}
 	
-	@objc func startGame() {
-		title = allWords.randomElement()
-		usedWords.removeAll(keepingCapacity: true)
+	@objc func startGame(_ newGame: Bool = false) {
+		
+		if newGame == true {
+			if let word = defaults.string(forKey: "CurrentWord") {
+				currentWord = word
+				usedWords = defaults.object(forKey: "UsedWords") as? [String] ?? [String]()
+			} else {
+				currentWord = allWords.randomElement()
+				defaults.set(currentWord, forKey: "CurrentWord")
+				usedWords.removeAll(keepingCapacity: true)
+			}
+		} else {
+			currentWord = allWords.randomElement()
+			defaults.set(currentWord, forKey: "CurrentWord")
+			usedWords.removeAll(keepingCapacity: true)
+		}
+		
+		title = currentWord
 		tableView.reloadData()
 	}
 	
@@ -77,6 +95,7 @@ class ViewController: UITableViewController {
 					
 					let indexPath = IndexPath(row: 0, section: 0)
 					tableView.insertRows(at: [indexPath], with: .automatic)
+					defaults.set(usedWords, forKey: "UsedWords")
 					
 					return
 				} else {
@@ -91,7 +110,7 @@ class ViewController: UITableViewController {
 	}
 	
 	func isPossible(word: String) -> Bool {
-		guard var tempWord = title?.lowercased() else { return false }
+		guard var tempWord = currentWord?.lowercased() else { return false }
 		for letter in word {
 			if let position = tempWord.firstIndex(of: letter) {
 				tempWord.remove(at: position)
@@ -104,7 +123,7 @@ class ViewController: UITableViewController {
 	}
 	
 	func isOriginal(word: String) -> Bool {
-		if word == title?.lowercased() { return false }
+		if word == currentWord?.lowercased() { return false }
 		
 		return !usedWords.contains(word)
 	}

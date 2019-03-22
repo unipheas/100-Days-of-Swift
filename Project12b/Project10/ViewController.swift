@@ -16,6 +16,18 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+		
+		let defaults = UserDefaults.standard
+		
+		if let savedPeople = defaults.object(forKey: "people") as? Data {
+			let jsonDecoder = JSONDecoder()
+			
+			do {
+				people = try jsonDecoder.decode([Person].self, from: savedPeople)
+			} catch {
+				print("Failed to load people")
+			}
+		}
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -50,6 +62,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 		ac.addAction(UIAlertAction(title: "Delete", style: .default) { [weak self] _ in
 			self?.people.remove(at: indexPath.item)
 			self?.collectionView.reloadData()
+			self?.save()
 		})
 		ac.addAction(UIAlertAction(title: "Rename", style: .default) { [weak self] _ in
 			let ac = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
@@ -62,6 +75,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 				person.name = newName
 	
 				self?.collectionView.reloadData()
+				self?.save()
 			})
 			
 			self?.present(ac, animated: true)
@@ -96,11 +110,22 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 		collectionView.reloadData()
 		
 		dismiss(animated: true)
+		save()
 	}
 	
 	func getDocumentsDirectory() -> URL {
 		let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 		return paths[0]
+	}
+	
+	func save() {
+		let jsonEncoder = JSONEncoder()
+		if let savedData = try? jsonEncoder.encode(people) {
+			let defaults = UserDefaults.standard
+			defaults.set(savedData, forKey: "people")
+		} else {
+			print("Failed to save people.")
+		}
 	}
 }
 

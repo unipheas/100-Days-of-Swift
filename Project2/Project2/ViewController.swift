@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+	
+	let defaults = UserDefaults.standard
 
 	@IBOutlet var button1: UIButton!
 	@IBOutlet var button2: UIButton!
@@ -19,9 +21,12 @@ class ViewController: UIViewController {
 	var correctAnswer = 0
 	var totalQuestions = 0
 	var sharedEnabled = false
+	var highestScore: Int!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		loadHighestScore()
 		
 		countries += [
 			"estonia",
@@ -57,8 +62,7 @@ class ViewController: UIViewController {
 	}
 	
 	func askQuestion(action: UIAlertAction! = nil) {
-		print(totalQuestions)
-		
+		saveHighestScore(score)
 		countries.shuffle()
 		correctAnswer = Int.random(in: 0...2)
 		
@@ -98,6 +102,7 @@ class ViewController: UIViewController {
 		
 		if sharedEnabled {
 			alertController.addAction(UIAlertAction(title: "Share", style: .default, handler: shareTapped))
+			sharedEnabled = false
 		}
 		
 		alertController.addAction(UIAlertAction(title: "Continute", style: .default, handler: askQuestion))
@@ -121,4 +126,16 @@ class ViewController: UIViewController {
 		present(alertController, animated: true)
 	}
 	
+	func loadHighestScore() {
+		highestScore = defaults.integer(forKey: "HighestScore")
+	}
+	
+	func saveHighestScore(_ score: Int) {
+		if score > highestScore {
+			defaults.set(score, forKey: "HighestScore")
+			highestScore = score
+			sharedEnabled = true
+			showAlert(title: "High Score!", message: "Your new high score is \(score)")
+		}
+	}
 }
