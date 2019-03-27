@@ -13,6 +13,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var intensity: UISlider!
+	@IBOutlet var changeFilterButton: UIButton!
 	
 	var currentImage: UIImage!
 	
@@ -61,7 +62,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 	}
 	
 	@IBAction func save(_ sender: Any) {
-		guard let image = imageView.image else { return }
+		guard let image = imageView.image else {
+			showAlert("No Image", "There is currently no image selected, please choose one.")
+			return
+		}
 		UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
 	}
 	
@@ -85,11 +89,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 	
 	func setFilter(action: UIAlertAction) {
 		// make sure we have a valid image before continuing!
-		guard currentImage != nil else { return }
+		guard currentImage != nil else {
+			showAlert("No Image", "There is currently no image selected, please choose one.")
+			return
+		}
 		
 		// safely read the alert action's title
 		guard let actionTitle = action.title else { return }
 		
+		changeFilterButton.setTitle(action.title, for: .normal)
 		currentFilter = CIFilter(name: actionTitle)
 		
 		let beginImage = CIImage(image: currentImage)
@@ -100,15 +108,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 	
 	@objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
 		if let error = error {
-			// we got back an error!
-			let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
-			ac.addAction(UIAlertAction(title: "OK", style: .default))
-			present(ac, animated: true)
+			showAlert("Save error", error.localizedDescription)
 		} else {
-			let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
-			ac.addAction(UIAlertAction(title: "OK", style: .default))
-			present(ac, animated: true)
+			showAlert("Saved!", "Your altered image has been saved to your photos.")
 		}
+	}
+	
+	func showAlert(_ title: String, _ message: String) {
+		let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "OK", style: .default))
+		present(ac, animated: true)
 	}
 }
 
