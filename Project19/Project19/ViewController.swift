@@ -24,16 +24,36 @@ class ViewController: UIViewController, MKMapViewDelegate {
 		
 		mapView.addAnnotations([london, oslo, paris, rome, washington])
 		
+		let ac = UIAlertController(title: "Map Type", message: "Which type of map would you like to see?", preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "Standard", style: .default, handler: setMap))
+		ac.addAction(UIAlertAction(title: "Satellite", style: .default, handler: setMap))
+		ac.addAction(UIAlertAction(title: "Hybrid", style: .default, handler: setMap))
+		present(ac, animated: true)
+		
+	}
+	
+	func setMap(action: UIAlertAction) {
+		guard let actionTitle = action.title else { return }
+		
+		switch actionTitle {
+		case "Satellite":
+			mapView.mapType = .satellite
+		case "Hybrid":
+			mapView.mapType = .hybrid
+		default:
+			mapView.mapType = .standard
+		}
 	}
 
 	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 		guard annotation is Capital else { return nil }
 		let identifier = "Capital"
-		var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+		var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
 		if annotationView == nil {
 			annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
 			annotationView?.canShowCallout = true
 			let btn = UIButton(type: .detailDisclosure)
+			annotationView?.pinTintColor = UIColor(red: 0, green: 255, blue: 0, alpha: 1)
 			annotationView?.rightCalloutAccessoryView = btn
 		} else {
 			annotationView?.annotation = annotation
