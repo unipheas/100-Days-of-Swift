@@ -17,6 +17,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	var possibleEnemies = ["ball", "hammer", "tv"]
 	var isGameOver = false
 	var gameTimer: Timer?
+	var fingerLifted: CGPoint?
+	
+	var counter = 0
 	
 	var score = 0 {
 		didSet {
@@ -49,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 		physicsWorld.contactDelegate = self
 		
-		gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+		setGameTimer(1)
     }
 	
 	@objc func createEnemy() {
@@ -65,6 +68,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		sprite.physicsBody?.angularVelocity = 5
 		sprite.physicsBody?.linearDamping = 0
 		sprite.physicsBody?.angularDamping = 0
+		
+		counter += 1
 	}
 	
 	override func update(_ currentTime: TimeInterval) {
@@ -77,6 +82,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		if !isGameOver {
 			score += 1
 		}
+		
+		if counter == 20 {
+			let interval = gameTimer?.timeInterval
+			gameTimer?.invalidate()
+			counter = 0
+			setGameTimer(interval! - 0.1)
+		}
+	}
+	
+	func setGameTimer(_ timer: Double) {
+		gameTimer = Timer.scheduledTimer(timeInterval: timer, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
 	}
 	
 	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -100,5 +116,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		player.removeFromParent()
 		
 		isGameOver = true
+		gameTimer?.invalidate()
+	}
+	
+	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+		guard let touch = touches.first else { return }
+		let location = touch.location(in: self)
+		
+		fingerLifted = location
 	}
 }
