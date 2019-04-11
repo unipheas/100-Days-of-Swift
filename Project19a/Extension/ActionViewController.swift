@@ -19,6 +19,7 @@ class ActionViewController: UIViewController {
         super.viewDidLoad()
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(scripts))
 		
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -41,15 +42,46 @@ class ActionViewController: UIViewController {
 		}
     }
 
-    @IBAction func done() {
+	@IBAction func done(script withScript: NSDictionary?) {
+		
 		let item = NSExtensionItem()
-		let argument: NSDictionary = ["customJavaScript": script.text]
+		let argument: NSDictionary
+		
+		if withScript == nil {
+			argument = ["customJavaScript": script.text]
+		} else {
+			argument = withScript!
+		}
+		
 		let webDictionary: NSDictionary = [NSExtensionJavaScriptFinalizeArgumentKey: argument]
 		let customJavaScript = NSItemProvider(item: webDictionary, typeIdentifier: kUTTypePropertyList as String)
 		item.attachments = [customJavaScript]
 		
 		extensionContext?.completeRequest(returningItems: [item])
     }
+	
+	@IBAction func scripts() {
+		let ac = UIAlertController(title: "Scripts", message: "Please choose a script.", preferredStyle: .actionSheet)
+		ac.addAction(UIAlertAction(title: "Show Address", style: .default, handler: setScript))
+		ac.addAction(UIAlertAction(title: "Canel", style: .cancel))
+		
+		present(ac, animated: true)
+	}
+	
+	func setScript(action: UIAlertAction) {
+		guard let actionTitle = action.title else { return }
+		
+		var argument: NSDictionary
+		
+		switch actionTitle {
+		case "Show Address":
+			argument = ["customerJavaScript": "window.alert('Showing');"]
+		default:
+			argument = ["customerJavaScript": "window.alert('Not Showing!');"]
+		}
+		
+		done(script: argument)
+	}
 
 	@objc func adjustForKeyboard(notification: Notification) {
 		guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
