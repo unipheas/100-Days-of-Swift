@@ -13,6 +13,7 @@ class GameScene: SKScene {
 	
 	var gameTimer: Timer?
 	var fireworks = [SKNode]()
+	var gameScore: SKLabelNode!
 	
 	let leftEdge = -22
 	let bottomEdge = -22
@@ -20,7 +21,7 @@ class GameScene: SKScene {
 	
 	var score = 0 {
 		didSet {
-			// your code here
+			gameScore.text = "Score: \(score)"
 		}
 	}
     
@@ -33,6 +34,13 @@ class GameScene: SKScene {
 		background.blendMode = .replace
 		background.zPosition = -1
 		addChild(background)
+		
+		gameScore = SKLabelNode(fontNamed: "Chalkduster")
+		gameScore.text = "Score: 0"
+		gameScore.position = CGPoint(x: 8, y: 8)
+		gameScore.horizontalAlignmentMode = .left
+		gameScore.fontSize = 48
+		addChild(gameScore)
 		
 		gameTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(launchFireworks), userInfo: nil, repeats: true)
 		
@@ -165,6 +173,46 @@ class GameScene: SKScene {
 				fireworks.remove(at: index)
 				firework.removeFromParent()
 			}
+		}
+	}
+	
+	func explode(firework: SKNode) {
+		if let emitter = SKEmitterNode(fileNamed: "explode") {
+			emitter.position = firework.position
+			addChild(emitter)
+		}
+		
+		firework.removeFromParent()
+	}
+	
+	func explodeFireworks() {
+		var numExploded = 0
+		
+		for (index, fireworkContainer) in fireworks.enumerated().reversed() {
+			guard let firework = fireworkContainer.children.first as? SKSpriteNode else { continue }
+			
+			if firework.name == "selected" {
+				// destroy this firework!
+				explode(firework: fireworkContainer)
+				fireworks.remove(at: index)
+				numExploded += 1
+			}
+		}
+		
+		switch numExploded {
+		case 0:
+			// nothing – rubbish!
+			break
+		case 1:
+			score += 200
+		case 2:
+			score += 500
+		case 3:
+			score += 1500
+		case 4:
+			score += 2500
+		default:
+			score += 4000
 		}
 	}
 }
