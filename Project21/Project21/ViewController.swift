@@ -30,7 +30,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 		}
 	}
 	
-	@objc func scheduleLocal() {
+	@objc func scheduleLocal(_ time: TimeInterval = 5) {
+		registerCategories()
+		
 		let center = UNUserNotificationCenter.current()
 		center.removeAllPendingNotificationRequests()
 		
@@ -41,10 +43,6 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 		content.userInfo = ["customData": "fizzbuzz"]
 		content.sound = UNNotificationSound.default
 		
-		var dateComponents = DateComponents()
-		dateComponents.hour = 10
-		dateComponents.minute = 30
-//		let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 		let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 		
 		let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -56,7 +54,8 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 		center.delegate = self
 		
 		let show = UNNotificationAction(identifier: "show", title: "Tell me more…", options: .foreground)
-		let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [])
+		let remind = UNNotificationAction(identifier: "remind", title: "Remind me later", options: .foreground)
+		let category = UNNotificationCategory(identifier: "alarm", actions: [show, remind], intentIdentifiers: [])
 		
 		center.setNotificationCategories([category])
 	}
@@ -70,13 +69,12 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 			
 			switch response.actionIdentifier {
 			case UNNotificationDefaultActionIdentifier:
-				// the user swiped to unlock
-				print("Default identifier")
-				
+				alertController("Default identifier")
 			case "show":
-				// the user tapped our "show more info…" button
-				print("Show more information…")
-				
+				alertController("Show more information...")
+			case "remind":
+				alertController("Reminder set")
+				scheduleLocal(86400)
 			default:
 				break
 			}
@@ -85,5 +83,13 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 		// you must call the completion handler when you're done
 		completionHandler()
 	}
+	
+	func alertController(_ message: String) {
+		let ac = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "Okay", style: .default))
+		
+		present(ac, animated: true)
+	}
+	
 }
 
