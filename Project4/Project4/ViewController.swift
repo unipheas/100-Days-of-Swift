@@ -95,7 +95,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
 					}
 				}
 			}
-		
+	
 			let alertController = UIAlertController(
 				title: "Warning",
 				message: "You're not allowed to view this website.",

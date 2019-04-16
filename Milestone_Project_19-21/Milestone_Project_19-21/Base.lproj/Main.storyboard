@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="00n-TM-n46">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Di2-O2-ZLu">
+            <objects>
+                <tableViewController id="2bQ-rz-Xno" customClass="ViewController" customModule="Milestone_Project_19_21" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uAx-Qw-OCQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Notes" id="njb-tT-Rt3">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="njb-tT-Rt3" id="deR-iW-SRd">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2bQ-rz-Xno" id="YF6-Yk-GPD"/>
+                            <outlet property="delegate" destination="2bQ-rz-Xno" id="Xru-gR-6O0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="dzr-wb-X8i"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FC8-d7-Hiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1060.8695652173915" y="76.339285714285708"/>
+        </scene>
+        <!--Notes Text-->
+        <scene sceneID="fcs-d8-r8h">
+            <objects>
+                <viewController storyboardIdentifier="NotesText" id="iIh-yL-DP2" customClass="NotesText" customModule="Milestone_Project_19_21" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bny-QQ-Gav">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nf1-5J-XZQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nf1-5J-XZQ" firstAttribute="leading" secondItem="8ma-Uu-saE" secondAttribute="leading" id="7N7-8L-BM9"/>
+                            <constraint firstItem="nf1-5J-XZQ" firstAttribute="top" secondItem="8ma-Uu-saE" secondAttribute="top" id="Oz4-Ef-G9l"/>
+                            <constraint firstItem="8ma-Uu-saE" firstAttribute="bottom" secondItem="nf1-5J-XZQ" secondAttribute="bottom" id="l61-Kt-s0S"/>
+                            <constraint firstItem="8ma-Uu-saE" firstAttribute="trailing" secondItem="nf1-5J-XZQ" secondAttribute="trailing" id="ns1-QO-hBS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8ma-Uu-saE"/>
+                    </view>
+                    <connections>
+                        <outlet property="textArea" destination="nf1-5J-XZQ" id="Jj9-lS-K6V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kdl-6b-2lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1915" y="82"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JJG-jh-CAJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="00n-TM-n46" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3Pe-LR-yQj">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2bQ-rz-Xno" kind="relationship" relationship="rootViewController" id="Nd2-M1-WSL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3dh-GV-kfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="150.72463768115944" y="76.339285714285708"/>
+        </scene>
+    </scenes>
+</document>
