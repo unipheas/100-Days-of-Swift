@@ -20,6 +20,7 @@ enum SequenceType: CaseIterable {
 class GameScene: SKScene {
 	
 	var gameScore: SKLabelNode!
+	var gameOver: SKLabelNode!
 	var livesImages = [SKSpriteNode]()
 	var lives = 3
 	var activeSliceBG: SKShapeNode!
@@ -430,6 +431,7 @@ class GameScene: SKScene {
 			return
 		}
 		
+		gameover()
 		isGameEnded = true
 		physicsWorld.speed = 0
 		isUserInteractionEnabled = false
@@ -442,5 +444,13 @@ class GameScene: SKScene {
 			livesImages[1].texture = SKTexture(imageNamed: "sliceLifeGone")
 			livesImages[2].texture = SKTexture(imageNamed: "sliceLifeGone")
 		}
+	}
+	
+	func gameover() {
+		gameOver = SKLabelNode(fontNamed: "Chalkduster")
+		gameOver.fontSize = 68
+		gameOver.position = CGPoint(x: 500, y: 350)
+		gameOver.text = "Game Over!"
+		addChild(gameOver)
 	}
 }
