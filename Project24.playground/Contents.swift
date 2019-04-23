@@ -34,6 +34,8 @@ extension String {
 	}
 }
 
+"this is".deletingSuffix("is")
+
 let weather = "it's going to rain"
 print(weather.capitalized)
 
@@ -81,5 +83,37 @@ attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range
 attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 8, length: 1))
 attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
 attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
+
+
+extension String {
+	func withPrefix (_ pre: String) -> String {
+		return pre + self
+	}
+}
+
+"pet".withPrefix("car")
+
+extension String {
+	var isNumeric: Bool {
+		let numberRegEx  = ".*[0-9]+.*"
+		let testCase = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
+		let containsNumber = testCase.evaluate(with: self)
+		
+		return containsNumber
+	}
+}
+
+"123".isNumeric
+
+extension String {
+	var lines: [String.SubSequence] {
+
+		let newArray = self.split(separator: "\n")
+
+		return newArray
+	}
+}
+
+"this\nis\na\ntest".lines
 
 
