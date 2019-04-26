@@ -101,7 +101,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
 			print("Connecting: \(peerID.displayName)")
 			
 		case .notConnected:
-			print("Not Connected: \(peerID.displayName)")
+			alert("\(peerID.displayName) disconnected")
 			
 		@unknown default:
 			print("Unknown state received: \(peerID.displayName)")
@@ -126,7 +126,6 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
 	}
 	
 	func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-		
 	}
 	
 	func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
@@ -135,6 +134,12 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
 	
 	func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
 		dismiss(animated: true)
+	}
+	
+	func alert(_ message: String) {
+		let ac = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "Okay", style: .default))
+		present(ac, animated: true)
 	}
 }
 
