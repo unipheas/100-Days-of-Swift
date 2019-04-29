@@ -8,6 +8,7 @@
 
 import CoreMotion
 import SpriteKit
+import UIKit
 
 enum CollisionTypes: UInt32 {
 	case player = 1
@@ -32,39 +33,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
 	var isGameOver = false
+	var level = 1
 	
     override func didMove(to view: SKView) {
-		let background = SKSpriteNode(imageNamed: "background.jpg")
-		background.position = CGPoint(x: 512, y: 384)
-		background.blendMode = .replace
-		background.zPosition = -1
-		addChild(background)
 		
-		loadLevel()
-		createPlayer()
+		loadLevel("level\(level)")
 		
 		physicsWorld.gravity = .zero
 		
 		motionManager = CMMotionManager()
 		motionManager.startAccelerometerUpdates()
 		
-		scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
-		scoreLabel.text = "Score: 0"
-		scoreLabel.horizontalAlignmentMode = .left
-		scoreLabel.position = CGPoint(x: 16, y: 16)
-		scoreLabel.zPosition = 2
-		addChild(scoreLabel)
-		
 		physicsWorld.contactDelegate = self
     }
 	
-	func loadLevel() {
-		guard let levelURL = Bundle.main.url(forResource: "level1", withExtension: "txt") else {
+	func loadLevel(_ level: String) {
+		guard let levelURL = Bundle.main.url(forResource: level, withExtension: "txt") else {
 			fatalError("Could not find level1.txt in the app bundle.")
 		}
 		guard let levelString = try? String(contentsOf: levelURL) else {
 			fatalError("Could not load level1.txt from the app bundle.")
 		}
+		
+		loadBackground()
+		createPlayer()
+		loadScore()
 		
 		let lines = levelString.components(separatedBy: "\n")
 		
@@ -73,47 +66,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 				let position = CGPoint(x: (64 * column) + 32, y: (64 * row) + 32)
 				
 				if letter == "x" {
-					let node = SKSpriteNode(imageNamed: "block")
-					node.position = position
-					
-					node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
-					node.physicsBody?.categoryBitMask = CollisionTypes.wall.rawValue
-					node.physicsBody?.isDynamic = false
-					addChild(node)
+					letterX(position)
 				} else if letter == "v"  {
-					let node = SKSpriteNode(imageNamed: "vortex")
-					node.name = "vortex"
-					node.position = position
-					node.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi, duration: 1)))
-					node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
-					node.physicsBody?.isDynamic = false
-					
-					node.physicsBody?.categoryBitMask = CollisionTypes.vortex.rawValue
-					node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
-					node.physicsBody?.collisionBitMask = 0
-					addChild(node)
+					letterV(position)
 				} else if letter == "s"  {
-					let node = SKSpriteNode(imageNamed: "star")
-					node.name = "star"
-					node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
-					node.physicsBody?.isDynamic = false
-					
-					node.physicsBody?.categoryBitMask = CollisionTypes.star.rawValue
-					node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
-					node.physicsBody?.collisionBitMask = 0
-					node.position = position
-					addChild(node)
+					letterS(position)
 				} else if letter == "f"  {
-					let node = SKSpriteNode(imageNamed: "finish")
-					node.name = "finish"
-					node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
-					node.physicsBody?.isDynamic = false
-					
-					node.physicsBody?.categoryBitMask = CollisionTypes.finish.rawValue
-					node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
-					node.physicsBody?.collisionBitMask = 0
-					node.position = position
-					addChild(node)
+					letterF(position)
 				} else if letter == " " {
 					// this is an empty space – do nothing!
 				} else {
@@ -121,6 +80,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 				}
 			}
 		}
+	}
+	
+	func loadBackground() {
+		let background = SKSpriteNode(imageNamed: "background.jpg")
+		background.position = CGPoint(x: 512, y: 384)
+		background.blendMode = .replace
+		background.zPosition = -1
+		addChild(background)
+	}
+	
+	func loadScore() {
+		scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+		scoreLabel.text = "Score: 0"
+		scoreLabel.horizontalAlignmentMode = .left
+		scoreLabel.position = CGPoint(x: 16, y: 16)
+		scoreLabel.zPosition = 2
+		addChild(scoreLabel)
+	}
+	
+	func letterX(_ position: CGPoint) {
+		let node = SKSpriteNode(imageNamed: "block")
+		node.position = position
+		
+		node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
+		node.physicsBody?.categoryBitMask = CollisionTypes.wall.rawValue
+		node.physicsBody?.isDynamic = false
+		addChild(node)
+	}
+	
+	func letterV(_ position: CGPoint) {
+		let node = SKSpriteNode(imageNamed: "vortex")
+		node.name = "vortex"
+		node.position = position
+		node.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi, duration: 1)))
+		node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+		node.physicsBody?.isDynamic = false
+	
+		node.physicsBody?.categoryBitMask = CollisionTypes.vortex.rawValue
+		node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+		node.physicsBody?.collisionBitMask = 0
+		addChild(node)
+	}
+	
+	func letterS(_ position: CGPoint) {
+		let node = SKSpriteNode(imageNamed: "star")
+		node.name = "star"
+		node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+		node.physicsBody?.isDynamic = false
+		
+		node.physicsBody?.categoryBitMask = CollisionTypes.star.rawValue
+		node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+		node.physicsBody?.collisionBitMask = 0
+		node.position = position
+		addChild(node)
+	}
+	
+	func letterF(_ position: CGPoint) {
+		let node = SKSpriteNode(imageNamed: "finish")
+		node.name = "finish"
+		node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+		node.physicsBody?.isDynamic = false
+		
+		node.physicsBody?.categoryBitMask = CollisionTypes.finish.rawValue
+		node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+		node.physicsBody?.collisionBitMask = 0
+		node.position = position
+		addChild(node)
 	}
 	
 	func createPlayer() {
@@ -198,7 +224,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			node.removeFromParent()
 			score += 1
 		} else if node.name == "finish" {
-			// next level?
+			let ac = UIAlertController(title: "WIN!", message: "You have won", preferredStyle: .alert)
+			ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: newLevel))
+			
+			let vc = self.view?.window?.rootViewController
+			if vc?.presentedViewController == nil {
+				vc?.present(ac, animated: true, completion: nil)
+			}
+			
 		}
+	}
+	
+	func newLevel(action: UIAlertAction) {
+		self.removeAllChildren()
+		level += 1
+		loadLevel("level\(level)")
 	}
 }

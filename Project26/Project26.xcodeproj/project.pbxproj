@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA43F052227681D40046576B /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = FA43F051227681D40046576B /* level2.txt */; };
+		FA43F054227686BC0046576B /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = FA43F053227686BC0046576B /* level3.txt */; };
 		FA69339A22741AA100C4A7CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69339922741AA100C4A7CC /* AppDelegate.swift */; };
 		FA69339C22741AA100C4A7CC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA69339B22741AA100C4A7CC /* GameScene.sks */; };
 		FA6933A022741AA100C4A7CC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69339F22741AA100C4A7CC /* GameScene.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA43F051227681D40046576B /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
+		FA43F053227686BC0046576B /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
 		FA69339622741AA100C4A7CC /* Project26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA69339922741AA100C4A7CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA69339B22741AA100C4A7CC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				FA6933A822741AA200C4A7CC /* LaunchScreen.storyboard */,
 				FA6933AB22741AA200C4A7CC /* Info.plist */,
 				FA6933B122741C3F00C4A7CC /* level1.txt */,
+				FA43F051227681D40046576B /* level2.txt */,
+				FA43F053227686BC0046576B /* level3.txt */,
 			);
 			path = Project26;
 			sourceTree = "<group>";
@@ -131,8 +137,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA43F054227686BC0046576B /* level3.txt in Resources */,
 				FA6933B222741C3F00C4A7CC /* level1.txt in Resources */,
 				FA6933A522741AA100C4A7CC /* Main.storyboard in Resources */,
+				FA43F052227681D40046576B /* level2.txt in Resources */,
 				FA69339C22741AA100C4A7CC /* GameScene.sks in Resources */,
 				FA6933A722741AA200C4A7CC /* Assets.xcassets in Resources */,
 				FA6933AA22741AA200C4A7CC /* LaunchScreen.storyboard in Resources */,
