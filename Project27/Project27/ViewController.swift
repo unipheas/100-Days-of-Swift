@@ -169,7 +169,7 @@ class ViewController: UIViewController {
 			]
 			
 			// 4
-			let string = "The best-laid schemes o'\nmice an' men gang aft agley"
+			let string = "The best-laid schemes o'\nmice an' men gang aft agley 😝"
 			let attributedString = NSAttributedString(string: string, attributes: attrs)
 			
 			// 5
