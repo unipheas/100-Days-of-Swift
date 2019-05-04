@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Milestone_projects_25_27" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUG-bi-TgB">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="Htu-tF-ec7"/>
+                                    <tabBarItem systemItem="more" id="pID-PU-Clj"/>
+                                </items>
+                            </tabBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Of5-iY-sur">
+                                <rect key="frame" x="0.0" y="93" width="414" height="710"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="PUG-bi-TgB" secondAttribute="bottom" id="43u-sd-dPW"/>
+                            <constraint firstItem="Of5-iY-sur" firstAttribute="trailing" secondItem="PUG-bi-TgB" secondAttribute="trailing" id="KF4-8y-LL4"/>
+                            <constraint firstItem="Of5-iY-sur" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="49" id="U0i-2V-Vx7"/>
+                            <constraint firstItem="Of5-iY-sur" firstAttribute="leading" secondItem="PUG-bi-TgB" secondAttribute="leading" id="fgg-mT-oai"/>
+                            <constraint firstAttribute="trailing" secondItem="Of5-iY-sur" secondAttribute="trailing" id="hGc-y9-771"/>
+                            <constraint firstItem="Of5-iY-sur" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="lzz-na-yuX"/>
+                            <constraint firstItem="Of5-iY-sur" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nVg-dY-3Xf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Of5-iY-sur" id="9fW-LD-1oa"/>
+                        <outlet property="tabBar" destination="PUG-bi-TgB" id="2XB-W0-90S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+        </scene>
+    </scenes>
+</document>
