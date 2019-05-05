@@ -18,10 +18,17 @@ class ViewController: UIViewController {
 		
 		title = "Nothing to see here"
 		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+		
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
 		notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 		notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
+		
+	}
+	
+	@objc func done() {
+		saveSecretMessage()
 	}
 
 	@IBAction func authenicateTapped(_ sender: Any) {
@@ -76,6 +83,8 @@ class ViewController: UIViewController {
 		if let text = KeychainWrapper.standard.string(forKey: "SecretMessage") {
 			secret.text = text
 		}
+		
+		promptForPassword()
 	}
 	
 	@objc func saveSecretMessage() {
@@ -85,6 +94,18 @@ class ViewController: UIViewController {
 		secret.resignFirstResponder()
 		secret.isHidden = true
 		title = "Nothing to see here"
+	}
+	
+	func promptForPassword() {
+		let alertController = UIAlertController(title: "Enter Password", message: nil, preferredStyle: .alert)
+		alertController.addTextField(configurationHandler: nil)
+		
+		let submitAction = UIAlertAction(title: "Sumbit", style: .default) { [weak self, weak alertController] _ in
+			guard let answer = alertController?.textFields?[0].text else { return }
+		}
+		
+		alertController.addAction(submitAction)
+		present(alertController, animated: true)
 	}
 	
 }
