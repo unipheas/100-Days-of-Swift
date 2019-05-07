@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA6E6C9B22811B0B00CD4D53 /* hitPlayer.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA6E6C9922811B0B00CD4D53 /* hitPlayer.sks */; };
+		FA6E6C9C22811B0B00CD4D53 /* hitBuilding.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA6E6C9A22811B0B00CD4D53 /* hitBuilding.sks */; };
 		FABE5139227FC57100B5E6C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE5138227FC57100B5E6C8 /* AppDelegate.swift */; };
 		FABE513B227FC57100B5E6C8 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FABE513A227FC57100B5E6C8 /* GameScene.sks */; };
 		FABE513F227FC57100B5E6C8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE513E227FC57100B5E6C8 /* GameScene.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA6E6C9922811B0B00CD4D53 /* hitPlayer.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitPlayer.sks; sourceTree = "<group>"; };
+		FA6E6C9A22811B0B00CD4D53 /* hitBuilding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitBuilding.sks; sourceTree = "<group>"; };
 		FABE5135227FC57000B5E6C8 /* Project29.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project29.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABE5138227FC57100B5E6C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FABE513A227FC57100B5E6C8 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -62,6 +66,8 @@
 			children = (
 				FABE5138227FC57100B5E6C8 /* AppDelegate.swift */,
 				FABE513A227FC57100B5E6C8 /* GameScene.sks */,
+				FA6E6C9A22811B0B00CD4D53 /* hitBuilding.sks */,
+				FA6E6C9922811B0B00CD4D53 /* hitPlayer.sks */,
 				FABE513E227FC57100B5E6C8 /* GameScene.swift */,
 				FABE5140227FC57100B5E6C8 /* GameViewController.swift */,
 				FABE5142227FC57100B5E6C8 /* Main.storyboard */,
@@ -133,8 +139,10 @@
 			files = (
 				FABE5144227FC57100B5E6C8 /* Main.storyboard in Resources */,
 				FABE513B227FC57100B5E6C8 /* GameScene.sks in Resources */,
+				FA6E6C9B22811B0B00CD4D53 /* hitPlayer.sks in Resources */,
 				FABE5146227FC57100B5E6C8 /* Assets.xcassets in Resources */,
 				FABE5149227FC57100B5E6C8 /* LaunchScreen.storyboard in Resources */,
+				FA6E6C9C22811B0B00CD4D53 /* hitBuilding.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
