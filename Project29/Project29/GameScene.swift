@@ -175,6 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			newGame.viewController = self.viewController
 			self.viewController.currentGame = newGame
 			
+			self.viewController.updateScore(for: self.currentPlayer)
 			self.changePlayer()
 			newGame.currentPlayer = self.currentPlayer
 			

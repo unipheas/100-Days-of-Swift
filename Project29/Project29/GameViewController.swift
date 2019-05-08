@@ -20,6 +20,11 @@ class GameViewController: UIViewController {
 	@IBOutlet var velocityLabel: UILabel!
 	@IBOutlet var launchButton: UIButton!
 	@IBOutlet var playerNumber: UILabel!
+	@IBOutlet var playerOneScore: UILabel!
+	@IBOutlet var playerTwoScore: UILabel!
+	
+	var oneScore = 0
+	var twoScore = 0
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,5 +102,38 @@ class GameViewController: UIViewController {
 		velocityLabel.isHidden = false
 		
 		launchButton.isHidden = false
+	}
+	
+	func updateScore(for player: Int) {
+		if player == 1 {
+			oneScore += 1
+			playerOneScore.text = "PLAYER ONE: \(oneScore)"
+		} else {
+			twoScore += 1
+			playerTwoScore.text = "PLAYER TWO: \(twoScore)"
+		}
+		
+		if oneScore == 3 {
+			alert("Player one has won the game!")
+			resetScore()
+		}
+		
+		if twoScore == 3 {
+			alert("Player two has won the game!")
+			resetScore()
+		}
+	}
+	
+	func resetScore() {
+		oneScore = 0
+		playerOneScore.text = "PLAYER ONE: \(oneScore)"
+		twoScore = 0
+		playerTwoScore.text = "PLAYER TWO: \(twoScore)"
+	}
+	
+	func alert(_ message: String) {
+		let ac = UIAlertController(title: "WON!", message: message, preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "Okay", style: .default))
+		present(ac, animated: true)
 	}
 }
